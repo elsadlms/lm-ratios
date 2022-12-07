@@ -1,5 +1,5 @@
-const fs = require('fs').promises
-const probe = require('probe-image-size')
+import { promises as fs } from 'fs';
+import probe from 'probe-image-size';
 
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
 
@@ -21,7 +21,7 @@ async function getRatios(urls, month) {
     return ratio
   })
   ratios = await Promise.all(ratios)
-  console.log(ratios.join('\t'))
+  console.log(month.id, '\n', ratios.join('\t'))
 
   fs.writeFile(`src/ratios/${month.index}-${month.id}.tsv`, ratios.join('\t'), err => {
     if (err) {
